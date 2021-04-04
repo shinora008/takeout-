@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @shop.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @shop.address %>
+</p>
+
+<p>
+  <strong>Tel:</strong>
+  <%= @shop.tel %>
+</p>
+
+<p>
+  <strong>Menu:</strong>
+</p>
+
+
+
+<%= link_to 'AddDish', new_dish_path(@dish) %> |
+<%= link_to 'Edit', edit_shop_path(@shop) %> |
+<%= link_to 'Back', shops_path %>
