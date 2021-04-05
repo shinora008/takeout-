@@ -1,10 +1,10 @@
 class WebhookController < ApplicationController
-  require 'line/bot'
+  require 'line/bot'  # gem 'line-bot-api'
 
-  protect_from_forgery except: [:callback]
+  protect_from_forgery except: [:callback] # CSRF対策無効化
 
   def client
-    @client ||= Line:Bot:Client.new{ |config|
+    @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
     }
@@ -23,17 +23,17 @@ class WebhookController < ApplicationController
     events.each do |event|
       case event
       when Line::Bot::Event::Message
-        case event.Type
-        when Line::Bot::Event::MessageType::text
+        case event.type
+        when Line::Bot::Event::MessageType::Text
           message = {
             type: 'text',
             text: event.message['text']
           }
           client.reply_message(event['replyToken'], message)
-          end
         end
       end
-
-      "OK"
     end
+
+    "OK"
+  end
 end
